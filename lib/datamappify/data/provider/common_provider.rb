@@ -101,7 +101,8 @@ module Datamappify
           #
           # @return [Module]
           def records_namespace
-            @records_namespace ||= Data::Record.const_set(class_name, Module.new)
+            @records_namespace ||= Data::Record.const_get(class_name) ||
+              Data::Record.const_set(class_name, Module.new)
           end
         end
 
